@@ -1,42 +1,101 @@
 // App.jsx
-import React, { useState } from 'react';
-import { Calculadora } from './Calculadora';
+// Componente principal da calculadora científica
+// Comentários detalhados linha a linha para facilitar o entendimento
 
-const calc = new Calculadora();
+import React, { useState } from 'react'; // Importa React e o hook useState para gerenciar estados
+import { Calculadora } from './Calculadora'; // Importa a classe Calculadora com as operações matemáticas
+
+const calc = new Calculadora(); // Cria uma instância da Calculadora para ser usada no componente
 
 export default function App() {
+    // Estado para armazenar o valor digitado pelo usuário (expressão ou lista)
     const [input, setInput] = useState('');
+    // Estado para armazenar o resultado do cálculo
     const [resultado, setResultado] = useState('');
+    // Estado para armazenar o modo de ângulo selecionado (RAD ou DEG)
     const [modoAngulo, setModoAngulo] = useState('RAD');
+    // Estado para armazenar a operação selecionada (avaliar, media, mediana, etc)
     const [operacao, setOperacao] = useState('avaliar');
 
+    // Função chamada ao clicar no botão Calcular
     const handleCalcular = () => {
-        calc.setAngleMode(modoAngulo);
+        calc.setAngleMode(modoAngulo); // Define o modo de ângulo na calculadora
+        // Se a operação for 'avaliar', avalia a expressão diretamente
+        // Caso contrário, chama o método main para operações estatísticas
         const r = operacao === 'avaliar'
             ? calc.avaliar(input)
             : calc.main(operacao, input);
-        setResultado(String(r));
+        setResultado(String(r)); // Atualiza o estado do resultado para exibir na tela
     };
 
+    // Renderiza a interface da calculadora
     return (
-        <div className="max-w-md mx-auto p-4 rounded-xl bg-gray-900 text-white shadow-lg mt-10">
-            <h1 className="text-2xl font-bold mb-4">Calculadora Científica</h1>
+        <div
+            style={{
+                maxWidth: 400, // Largura máxima do container
+                margin: '40px auto', // Centraliza vertical e horizontalmente
+                padding: 24, // Espaçamento interno
+                borderRadius: 12, // Bordas arredondadas
+                background: '#222', // Cor de fundo escura
+                color: '#fff', // Cor do texto
+                boxShadow: '0 2px 12px #0006' // Sombra para destaque
+            }}
+        >
+            {/* Título da calculadora */}
+            <h1 style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 16 }}>
+                Calculadora Científica
+            </h1>
 
-            <label className="block mb-2">Expressão ou Lista:</label>
+            {/* Campo de entrada para expressão ou lista de números */}
+            <label style={{ display: 'block', marginBottom: 8 }}>
+                Expressão ou Lista:
+            </label>
             <input
-                className="w-full p-2 rounded bg-gray-800 border border-gray-600"
-                type="text"
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                placeholder="Ex: 2*A+sin(PI/2) ou 1,2,3"
+                style={{
+                    width: '100%', // Ocupa toda a largura
+                    padding: 8, // Espaçamento interno
+                    borderRadius: 6, // Bordas arredondadas
+                    border: '1px solid #444', // Borda discreta
+                    background: '#333', // Fundo escuro
+                    color: '#fff', // Texto branco
+                    marginBottom: 16 // Espaço abaixo
+                }}
+                type="text" // Tipo texto
+                value={input} // Valor do input controlado pelo estado
+                onChange={e => setInput(e.target.value)} // Atualiza o estado ao digitar
+                placeholder="Ex: 2*A+sin(PI/2) ou 1,2,3" // Dica para o usuário
             />
 
-            <div className="flex justify-between mt-4">
+            {/* Linha com seleção de operação e modo de ângulo */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+                {/* Seleção da operação matemática ou estatística */}
                 <select
-                    value={operacao}
-                    onChange={e => setOperacao(e.target.value)}
-                    className="p-2 bg-gray-800 border border-gray-600 rounded"
+                    value={operacao} // Valor selecionado
+                    onChange={e => setOperacao(e.target.value)} // Atualiza o estado ao mudar
+                    style={{
+                        flex: 1,
+                        padding: 8,
+                        borderRadius: 6,
+                        background: '#333',
+                        color: '#fff',
+                        border: '1px solid #444'
+                    }}
                 >
+                    <option value="soma">Soma</option>
+                    <option value="subtracao">Subtração</option>
+                    <option value="multiplicacao">Multiplicação</option>
+                    <option value="divisao">Divisão</option>
+                    <option value="potencia">Potência</option>
+                    <option value="raizQuadrada">Raiz Quadrada</option>
+                    <option value="seno">Seno</option>
+                    <option value="cosseno">Cosseno</option>
+                    <option value="tangente">Tangente</option>
+                    <option value="cotangente">Cotangente</option>
+                    <option value="secante">Secante</option>
+                    <option value="cossecante">Cossecante</option>
+                    <option value="logaritmo">Logaritmo</option>
+
+                    
                     <option value="avaliar">Expressão</option>
                     <option value="media">Média</option>
                     <option value="mediana">Mediana</option>
@@ -44,30 +103,56 @@ export default function App() {
                     <option value="variancia">Variância</option>
                     <option value="desvioPadrao">Desvio Padrão</option>
                 </select>
-
+                {/* Seleção do modo de ângulo (radiano ou graus) */}
                 <select
                     value={modoAngulo}
                     onChange={e => setModoAngulo(e.target.value)}
-                    className="p-2 bg-gray-800 border border-gray-600 rounded"
+                    style={{
+                        flex: 1,
+                        padding: 8,
+                        borderRadius: 6,
+                        background: '#333',
+                        color: '#fff',
+                        border: '1px solid #444'
+                    }}
                 >
                     <option value="RAD">Radiano</option>
                     <option value="DEG">Graus</option>
                 </select>
-
-                <button
-                    onClick={handleCalcular}
-                    className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
-                >
-                    Calcular
-                </button>
             </div>
 
+            {/* Botão para executar o cálculo */}
+            <button
+                onClick={handleCalcular} // Chama a função ao clicar
+                style={{
+                    width: '100%',
+                    padding: 10,
+                    borderRadius: 6,
+                    background: '#1976d2',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    border: 'none',
+                    cursor: 'pointer',
+                    marginBottom: 12
+                }}
+            >
+                Calcular
+            </button>
+
+            {/* Exibe o resultado se houver */}
             {resultado && (
-                <div className="mt-4 p-2 bg-gray-800 border border-gray-600 rounded">
+                <div
+                    style={{
+                        marginTop: 16,
+                        padding: 12,
+                        background: '#333',
+                        borderRadius: 6,
+                        border: '1px solid #444'
+                    }}
+                >
                     <strong>Resultado:</strong> {resultado}
                 </div>
             )}
         </div>
     );
 }
-
