@@ -3,8 +3,27 @@
 // Comentários detalhados linha a linha para facilitar o entendimento
 
 import React, { useState } from 'react'; // Importa React e o hook useState para gerenciar estados
-import { Calculadora } from './Calculadora'; // Importa a classe Calculadora com as operações matemáticas
 
+import { Calculadora } from './Models/Calculadora'; // Importa a classe Calculadora com as operações matemáticas
+import { Aritimetica } from './Models/Aritimetica';
+
+//import { Científicas } from './Models/Científicas';
+//import {Calculo_numerico} from './Models/Calculo_numerico'; // Importa a classe para cálculos numéricos
+//import {Conversores_de_moeda} from './Models/Conversores_de_moeda'; // Importa a classe para conversão de moedas
+//import {Equacoes_e_Sistemas} from './Models/Equacoes_e_Sistemas'; // Importa a classe para resolver equações e sistemas
+//import {Estatisticadescritiva} from './Models/Estatisticadescritiva'; // Importa a classe para estatística descritiva
+//import {Fracoes} from './Models/Fracoes'; // Importa a classe para operações com frações
+//import {Geometria} from './Models/Geometria'; // Importa a classe
+//import {Graficos} from './Models/Graficos'; // Importa a classe para gráficos
+
+
+import logo from './assets/logo.png';
+<img src={logo} alt="Logo do MathCore" />
+
+
+
+const arit = new Aritimetica(); // Cria uma instância da Aritmetica para ser usada no componente
+//const cient = new Científicas(); // Cria uma instância da Científicas para
 const calc = new Calculadora(); // Cria uma instância da Calculadora para ser usada no componente
 
 export default function App() {
@@ -16,6 +35,8 @@ export default function App() {
     const [modoAngulo, setModoAngulo] = useState('RAD');
     // Estado para armazenar a operação selecionada (avaliar, media, mediana, etc)
     const [operacao, setOperacao] = useState('avaliar');
+    // Estado para armazenar o histórico das contas
+    const [historico, setHistorico] = useState([]);
 
     // Função chamada ao clicar no botão Calcular
     const handleCalcular = () => {
@@ -26,6 +47,11 @@ export default function App() {
             ? calc.avaliar(input)
             : calc.main(operacao, input);
         setResultado(String(r)); // Atualiza o estado do resultado para exibir na tela
+        // Adiciona a operação ao histórico
+        setHistorico(prev => [
+            { expressao: input, operacao, modoAngulo, resultado: String(r) },
+            ...prev
+        ]);
     };
 
     // Renderiza a interface da calculadora
@@ -45,6 +71,22 @@ export default function App() {
             <h1 style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 16 }}>
                 Calculadora Científica
             </h1>
+
+            {/* Histórico das contas anteriores */}
+            {historico.length > 0 && (
+                <div style={{ marginBottom: 16, background: '#181818', borderRadius: 6, padding: 8, border: '1px solid #333', maxHeight: 120, overflowY: 'auto' }}>
+                    <strong>Histórico:</strong>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        {historico.map((item, idx) => (
+                            <li key={idx} style={{ fontSize: 13, borderBottom: '1px solid #333', padding: '2px 0' }}>
+                                <span style={{ color: '#90caf9' }}>{item.expressao}</span>
+                                {' '}<span style={{ color: '#aaa' }}>[{item.operacao}, {item.modoAngulo}]</span>
+                                {' '}= <span style={{ color: '#fff' }}>{item.resultado}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
             {/* Campo de entrada para expressão ou lista de números */}
             <label style={{ display: 'block', marginBottom: 8 }}>
@@ -80,12 +122,16 @@ export default function App() {
                         color: '#fff',
                         border: '1px solid #444'
                     }}
-                >
+      >   
+                    {/*  */}
+                    
                     <option value="soma">Soma</option>
                     <option value="subtracao">Subtração</option>
                     <option value="multiplicacao">Multiplicação</option>
                     <option value="divisao">Divisão</option>
                     <option value="potencia">Potência</option>
+ {/*  */}
+
                     <option value="raizQuadrada">Raiz Quadrada</option>
                     <option value="seno">Seno</option>
                     <option value="cosseno">Cosseno</option>

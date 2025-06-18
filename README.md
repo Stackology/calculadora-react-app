@@ -3,6 +3,8 @@
 Este projeto consiste em uma calculadora desenvolvida em JavaScript, capaz de realizar operações estatísticas e matemáticas, como média, mediana, moda, variância, desvio padrão e avaliação de expressões matemáticas com variáveis.
 
 ## Funcionalidades
+- **Soma** :
+- Su 
 - **Média**: Calcula a média aritmética de uma lista de números.
 - **Mediana**: Determina o valor central de um conjunto de números.
 - **Moda**: Identifica o valor mais frequente em uma lista.

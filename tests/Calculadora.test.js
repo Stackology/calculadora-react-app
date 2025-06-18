@@ -4,7 +4,7 @@
 // Cada teste cobre um aspecto específico da lógica da calculadora, seguindo boas práticas de testes.
 // Comentários detalhados são fornecidos para facilitar o entendimento e a manutenção do código.
 
-import { Calculadora } from '../src/Calculadora';
+import { Calculadora } from '../src/Models/Calculadora';
 
 // Descreve o grupo de testes para a classe Calculadora
 // Utiliza o describe para agrupar todos os testes relacionados
