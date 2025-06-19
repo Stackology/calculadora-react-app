@@ -6,7 +6,7 @@ Este arquivo serve para acompanhar o progresso das principais tarefas e demandas
 
 ### Operações Matemáticas
 
-- [ ] Implementar operações básicas (soma, subtração, multiplicação, divisão, potência(exponenciação), raiz, n-ésima raiz,Fatorial, percentuais mod(modulo/resto))
+- [x] Implementar operações básicas (soma, subtração, multiplicação, divisão, potência(exponenciação), raiz, n-ésima raiz,Fatorial, percentuais mod(modulo/resto))
 
 - [ ] Implementar operações científicas (seno, cosseno, tangente (inversas (asin, acos, atan)))
 

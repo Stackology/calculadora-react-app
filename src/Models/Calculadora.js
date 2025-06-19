@@ -29,7 +29,7 @@ if (typeof valores[0] === 'string') {
         // Retorna a diferença entre o primeiro valor e a soma dos demais
         return valores.reduce((acc, val) => acc - val);
     }
-    
+
     // Multiplica dois valores
     multiplicacao(...valores) {
         // Se for uma string, converte para array de números
@@ -74,9 +74,29 @@ if (typeof valores[0] === 'string') {
         // Caso contrário, retorna a raiz quadrada
         return Math.sqrt(valor);
     }
+    //Calcula o fatorial de um número
+    fatorial(valor) {
+        // Converte valor para número
+        valor = Number(valor);
+        // Se valor for negativo, retorna erro
+        if (valor < 0) return 'Erro: fatorial de número negativo';
+        // Se valor for 0 ou 1, retorna 1 (casos base)
+        if (valor === 0 || valor === 1) return 1;
+        // Calcula o fatorial multiplicando de 2 até o valor
+        let resultado = 1;
+        for (let i = 2; i <= valor; i++) {
+            resultado *= i;
+        }
+        return resultado;
+    }
 
-  
-
+    // Calcula o módulo (resto da divisão) de dois números
+    modulo(a, b) {
+        // Se b for zero, retorna erro
+        if (b === 0) return 'Erro: divisão por zero';
+        // Retorna o resto da divisão de a por b
+        return a % b;
+    }
 
 
 //------------------------------------------------------------------

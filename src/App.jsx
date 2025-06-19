@@ -130,6 +130,8 @@ export default function App() {
                     <option value="multiplicacao">Multiplicação</option>
                     <option value="divisao">Divisão</option>
                     <option value="potencia">Potência</option>
+                    <option value="fatorial">Fatorial</option>
+                    <option value="modulo">Módulo</option>
  {/*  */}
 
                     <option value="raizQuadrada">Raiz Quadrada</option>
